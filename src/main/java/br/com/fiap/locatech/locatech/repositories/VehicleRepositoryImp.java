@@ -37,7 +37,7 @@ public class VehicleRepositoryImp implements VehicleRepository {
     @Override
     public Integer save(Vehicle vehicle) {
         return this.jdbcClient
-                .sql("INSERT INTO vehicles (make, model, plate, yaer, color, daily_rent) values (:make, :model, :plate, :yaer, :color, :daily_rent)")
+                .sql("INSERT INTO vehicles (make, model, plate, production_year, color, daily_rent) values (:make, :model, :plate, :production_year, :color, :daily_rent)")
                 .param("make", vehicle.getMake())
                 .param("model", vehicle.getModel())
                 .param("plate", vehicle.getPlate())
@@ -50,7 +50,7 @@ public class VehicleRepositoryImp implements VehicleRepository {
     @Override
     public Integer update(Vehicle vehicle, Long id) {
         return this.jdbcClient
-                .sql("UPDATE vehicles SET make = :make, model = :model, plate = :plate, yaer = :year, color = :color, daily_rent = :daily_rent WHERE id = :id")
+                .sql("UPDATE vehicles SET make = :make, model = :model, plate = :plate, production_year = :production_year, color = :color, daily_rent = :daily_rent WHERE id = :id")
                 .param("id", id)
                 .param("make", vehicle.getMake())
                 .param("model", vehicle.getModel())
