@@ -28,7 +28,7 @@ public class VehicleService {
 
     public void save(Vehicle vehicle) {
         var saved = this.vehicleRepository.save(vehicle);
-        Assert.state(saved != 1, "save failed - vehicle: " + vehicle);
+        Assert.state(saved == 1, "save failed - vehicle: " + vehicle);
     }
 
     public void update(Vehicle vehicle, Long id) {
