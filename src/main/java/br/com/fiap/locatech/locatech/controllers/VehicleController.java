@@ -32,4 +32,14 @@ public class VehicleController {
 
         return ResponseEntity.ok().body(vehicles);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Vehicle>> findById(
+            @PathVariable("id") Long id
+    ) {
+        logger.info("/vehicles/" + id);
+
+        Optional<Vehicle> vehicle = this.vehicleRepository.findById(id);
+        return ResponseEntity.ok().body(vehicle);
+    }
 }
