@@ -4,7 +4,6 @@ import br.com.fiap.locatech.locatech.entities.Vehicle;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +41,7 @@ public class VehicleRepositoryImp implements VehicleRepository {
                 .param("make", vehicle.getMake())
                 .param("model", vehicle.getModel())
                 .param("plate", vehicle.getPlate())
-                .param("year", vehicle.getYear())
+                .param("production_year", vehicle.getProductionYear())
                 .param("color", vehicle.getColor())
                 .param("daily_rent", vehicle.getDailyRent())
                 .update();
@@ -56,7 +55,7 @@ public class VehicleRepositoryImp implements VehicleRepository {
                 .param("make", vehicle.getMake())
                 .param("model", vehicle.getModel())
                 .param("plate", vehicle.getPlate())
-                .param("year", vehicle.getYear())
+                .param("production_year", vehicle.getProductionYear())
                 .param("color", vehicle.getColor())
                 .param("daily_rent", vehicle.getDailyRent())
                 .update();

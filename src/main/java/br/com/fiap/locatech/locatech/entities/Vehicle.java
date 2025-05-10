@@ -15,7 +15,7 @@ public class Vehicle {
     private String make;
     private String model;
     private String plate;
-    private int year;
+    private int productionYear;
     private String color;
     private BigDecimal dailyRent;
 }
