@@ -15,6 +15,9 @@ public class Rent {
     private Long id;
     private Long personId;
     private Long vehicleId;
+    private String vehicleModel;
+    private String personName;
+    private String personCpf;
     private LocalDate startedAt;
     private LocalDate endedAt;
     private BigDecimal total;
