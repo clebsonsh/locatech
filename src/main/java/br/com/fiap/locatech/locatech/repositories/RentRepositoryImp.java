@@ -74,8 +74,13 @@ public class RentRepositoryImp implements RentRepository {
 
     @Override
     public Integer save(Rent rent) {
+        String query = """
+                INSERT INTO rents (person_id, vehicle_id, started_at, ended_at, total)
+                VALUES (:person_id, :vehicle_id, :started_at, :ended_at, :total)
+                """;
+
         return this.jdbcClient
-                .sql("INSERT INTO rents (person_id, vehicle_id, started_at, ended_at, total) values (:person_id, :vehicle_id, :started_at, :ended_at, :total)")
+                .sql(query)
                 .param("person_id", rent.getPersonId())
                 .param("vehicle_id", rent.getVehicleId())
                 .param("started_at", rent.getStartedAt())
@@ -86,8 +91,18 @@ public class RentRepositoryImp implements RentRepository {
 
     @Override
     public Integer update(Rent rent, Long id) {
+        String query = """
+                UPDATE rents
+                SET person_id = :person_id,
+                    vehicle_id = :vehicle_id,
+                    started_at = :started_at,
+                    ended_at = :ended_at,
+                    total = :total
+                WHERE id = :id
+                """;
+
         return this.jdbcClient
-                .sql("UPDATE rents SET person_id = :person_id, vehicle_id = :vehicle_id, started_at = :started_at, ended_at = :ended_at, total = :total WHERE id = :id")
+                .sql(query)
                 .param("id", id)
                 .param("person_id", rent.getPersonId())
                 .param("vehicle_id", rent.getVehicleId())
@@ -99,8 +114,13 @@ public class RentRepositoryImp implements RentRepository {
 
     @Override
     public Integer delete(Long id) {
+        String query = """
+                DELETE FROM rents
+                WHERE id = :id
+                """;
+
         return this.jdbcClient
-                .sql("DELETE FROM rents WHERE id = :id")
+                .sql(query)
                 .param("id", id)
                 .update();
     }

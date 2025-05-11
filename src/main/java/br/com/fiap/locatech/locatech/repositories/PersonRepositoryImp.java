@@ -17,8 +17,14 @@ public class PersonRepositoryImp implements PersonRepository {
 
     @Override
     public Optional<Person> findById(Long id) {
+        String query = """
+                SELECT *
+                FROM people
+                WHERE id = :id
+                """;
+
         return this.jdbcClient
-                .sql("SELECT * FROM people WHERE id = :id")
+                .sql(query)
                 .param("id", id)
                 .query(Person.class)
                 .optional();
@@ -26,8 +32,15 @@ public class PersonRepositoryImp implements PersonRepository {
 
     @Override
     public List<Person> findAll(int size, int offset) {
+        String query = """
+                SELECT *
+                FROM people
+                LIMIT :size
+                OFFSET :offset
+                """;
+
         return this.jdbcClient
-                .sql("SELECT * FROM people LIMIT :size OFFSET :offset")
+                .sql(query)
                 .param("size", size)
                 .param("offset", offset)
                 .query(Person.class)
@@ -36,8 +49,13 @@ public class PersonRepositoryImp implements PersonRepository {
 
     @Override
     public Integer save(Person person) {
+        String query = """
+                INSERT INTO people (name, cpf, phone, email)
+                VALUES (:name, :cpf, :phone, :email)
+                """;
+
         return this.jdbcClient
-                .sql("INSERT INTO people (name, cpf, phone, email) values (:name, :cpf, :phone, :email)")
+                .sql(query)
                 .param("name", person.getName())
                 .param("cpf", person.getCpf())
                 .param("phone", person.getPhone())
@@ -47,8 +65,14 @@ public class PersonRepositoryImp implements PersonRepository {
 
     @Override
     public Integer update(Person person, Long id) {
+        String query = """
+                UPDATE people
+                SET name = :name, cpf = :cpf, phone = :phone, email = :email
+                WHERE id = :id
+                """;
+
         return this.jdbcClient
-                .sql("UPDATE people SET name = :name, cpf = :cpf, phone = :phone, email = :email WHERE id = :id")
+                .sql(query)
                 .param("id", id)
                 .param("name", person.getName())
                 .param("cpf", person.getCpf())
@@ -59,8 +83,13 @@ public class PersonRepositoryImp implements PersonRepository {
 
     @Override
     public Integer delete(Long id) {
+        String query = """
+                DELETE FROM people
+                WHERE id = :id
+                """;
+
         return this.jdbcClient
-                .sql("DELETE FROM people WHERE id = :id")
+                .sql(query)
                 .param("id", id)
                 .update();
     }
