@@ -22,4 +22,19 @@ CREATE TABLE people
 );
 
 INSERT INTO people (name, cpf, phone, email)
-VALUES ('John Doe', '11122233345', '11988776655', 'john.doe@mail.com')
+VALUES ('John Doe', '11122233345', '11988776655', 'john.doe@mail.com');
+
+CREATE TABLE rents
+(
+    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    person_id  BIGINT NOT NULL,
+    vehicle_id BIGINT NOT NULL,
+    started_at DATE,
+    ended_at   DATE,
+    total      DECIMAL(10, 2),
+    FOREIGN KEY (person_id) REFERENCES people (id),
+    FOREIGN KEY (vehicle_id) REFERENCES vehicles (id)
+);
+
+INSERT INTO rents (person_id, vehicle_id, started_at, ended_at, total)
+VALUES (1, 1, '2025-05-10', '2025-05-20', 5000.00);
