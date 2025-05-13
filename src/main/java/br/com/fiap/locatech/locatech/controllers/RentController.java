@@ -1,5 +1,6 @@
 package br.com.fiap.locatech.locatech.controllers;
 
+import br.com.fiap.locatech.locatech.dtos.RentRequestDTO;
 import br.com.fiap.locatech.locatech.entities.Rent;
 import br.com.fiap.locatech.locatech.services.RentService;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class RentController {
 
     @PostMapping
     public ResponseEntity<Void> save(
-            @RequestBody Rent rent
+            @RequestBody RentRequestDTO rent
     ) {
         logger.info("POST -> /rents");
         this.rentService.save(rent);
@@ -56,7 +57,7 @@ public class RentController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(
             @PathVariable("id") Long id,
-            @RequestBody Rent rent
+            @RequestBody RentRequestDTO rent
     ) {
         logger.info("PUT -> /rents/" + id);
         this.rentService.update(rent, id);
