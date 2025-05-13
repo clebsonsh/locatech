@@ -3,6 +3,7 @@ package br.com.fiap.locatech.locatech.controllers;
 import br.com.fiap.locatech.locatech.dtos.RentRequestDTO;
 import br.com.fiap.locatech.locatech.entities.Rent;
 import br.com.fiap.locatech.locatech.services.RentService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -46,7 +47,7 @@ public class RentController {
 
     @PostMapping
     public ResponseEntity<Void> save(
-            @RequestBody RentRequestDTO rent
+            @Valid @RequestBody RentRequestDTO rent
     ) {
         logger.info("POST -> /rents");
         this.rentService.save(rent);
@@ -57,7 +58,7 @@ public class RentController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(
             @PathVariable("id") Long id,
-            @RequestBody RentRequestDTO rent
+            @Valid @RequestBody RentRequestDTO rent
     ) {
         logger.info("PUT -> /rents/" + id);
         this.rentService.update(rent, id);
