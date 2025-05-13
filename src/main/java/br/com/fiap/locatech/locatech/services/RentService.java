@@ -3,6 +3,8 @@ package br.com.fiap.locatech.locatech.services;
 import br.com.fiap.locatech.locatech.dtos.RentRequestDTO;
 import br.com.fiap.locatech.locatech.entities.Rent;
 import br.com.fiap.locatech.locatech.repositories.RentRepository;
+import br.com.fiap.locatech.locatech.repositories.VehicleRepository;
+import br.com.fiap.locatech.locatech.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -25,7 +27,8 @@ public class RentService {
     }
 
     public Optional<Rent> findById(Long id) {
-        return this.rentRepository.findById(id);
+        return Optional.ofNullable(this.rentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Rent not found")));
     }
 
     public List<Rent> findAll(int size, int page) {
